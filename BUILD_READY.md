@@ -1,0 +1,1 @@
+The repository is prepared for a mobile-only GitHub Actions APK build.
