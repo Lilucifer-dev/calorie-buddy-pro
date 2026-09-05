@@ -38,16 +38,26 @@ jobs:
           test -f project/settings.gradle.kts
           test -f project/app/build.gradle.kts
 
-      - name: Patch AGP 9 Kotlin configuration
+      - name: Patch Android project for AGP 9
         working-directory: project
         run: |
           sed -i '/org\.jetbrains\.kotlin\.android/d' app/build.gradle.kts
           sed -i '/org\.jetbrains\.kotlin\.android/d' build.gradle.kts
           sed -i '/kotlinOptions[[:space:]]*{/,/^[[:space:]]*}/d' app/build.gradle.kts
-          echo '--- app/build.gradle.kts plugins ---'
-          sed -n '1,45p' app/build.gradle.kts
-          echo '--- root build.gradle.kts plugins ---'
-          sed -n '1,25p' build.gradle.kts
+          rm -f app/src/main/res/drawable/icon-512.png
+          rm -f app/src/main/res/drawable/icon-192.png
+          echo '--- app/build.gradle.kts ---'
+          sed -n '1,80p' app/build.gradle.kts
+          echo '--- root build.gradle.kts ---'
+          sed -n '1,30p' build.gradle.kts
+
+      - name: Verify Android resources
+        working-directory: project
+        run: |
+          if find app/src/main/res -type f | grep -E '/[^/]*-[^/]*\.(png|xml|jpg|jpeg|webp)$'; then
+            echo 'Invalid hyphenated Android resource filename found.'
+            exit 1
+          fi
 
       - name: Build Release APK
         working-directory: project
