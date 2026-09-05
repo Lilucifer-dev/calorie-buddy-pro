@@ -46,6 +46,7 @@ jobs:
           sed -i '/kotlinOptions[[:space:]]*{/,/^[[:space:]]*}/d' app/build.gradle.kts
           rm -f app/src/main/res/drawable/icon-512.png
           rm -f app/src/main/res/drawable/icon-192.png
+          rm -f app/src/main/res/values/styles.xml
           echo '--- app/build.gradle.kts ---'
           sed -n '1,80p' app/build.gradle.kts
           echo '--- root build.gradle.kts ---'
