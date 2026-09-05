@@ -43,8 +43,9 @@ jobs:
         run: |
           sed -i '/org\.jetbrains\.kotlin\.android/d' app/build.gradle.kts
           sed -i '/org\.jetbrains\.kotlin\.android/d' build.gradle.kts
+          sed -i '/kotlinOptions[[:space:]]*{/,/^[[:space:]]*}/d' app/build.gradle.kts
           echo '--- app/build.gradle.kts plugins ---'
-          sed -n '1,25p' app/build.gradle.kts
+          sed -n '1,45p' app/build.gradle.kts
           echo '--- root build.gradle.kts plugins ---'
           sed -n '1,25p' build.gradle.kts
 
