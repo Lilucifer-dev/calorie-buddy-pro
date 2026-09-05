@@ -35,6 +35,18 @@ jobs:
           rm -rf project
           mkdir project
           unzip -q Calorie_Buddy_V13_2_Cloud_APK_Build_FIXED.zip -d project
+          test -f project/settings.gradle.kts
+          test -f project/app/build.gradle.kts
+
+      - name: Patch AGP 9 Kotlin configuration
+        working-directory: project
+        run: |
+          sed -i '/org\.jetbrains\.kotlin\.android/d' app/build.gradle.kts
+          sed -i '/org\.jetbrains\.kotlin\.android/d' build.gradle.kts
+          echo '--- app/build.gradle.kts plugins ---'
+          sed -n '1,25p' app/build.gradle.kts
+          echo '--- root build.gradle.kts plugins ---'
+          sed -n '1,25p' build.gradle.kts
 
       - name: Build Release APK
         working-directory: project
