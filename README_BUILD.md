@@ -1,0 +1,1 @@
+Use the uploaded Calorie Buddy Pro project ZIP for the Android build. GitHub Actions workflow is configured separately.
