@@ -68,6 +68,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: calorie-buddy-pro-v13.2-apk
-          path: project/app/build/outputs/apk/release/app-release.apk
+          path: project/app/build/outputs/apk/release/*.apk
           if-no-files-found: error
           retention-days: 14
